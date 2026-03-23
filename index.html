@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 8</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 400px; text-align: center; }
+        h2 { color: #333; margin-bottom: 1.5rem; }
+        label { display: block; margin-top: 10px; color: #666; font-size: 0.9rem; text-align: left; }
+        input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 6px; margin-top: 20px; cursor: pointer; font-size: 1rem; }
+        
+        /* The CSS below makes the triangle perfect */
+        #output { 
+            margin-top: 20px; 
+            background: #2d3436; /* Dark background like your image */
+            color: #fab1a0;      /* Salmon/Orange star color like your image */
+            padding: 30px; 
+            border-radius: 6px; 
+            white-space: pre;    /* Keeps the spaces you calculate in JS */
+            font-family: 'Courier New', monospace; /* Vital for alignment */
+            font-size: 1.5rem; 
+            line-height: 1.5;
+            display: inline-block; /* Wraps background tightly around the pattern */
+            text-align: left;      /* Alignment is handled by the JS spaces */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Full Pyramid Generator</h2>
+    
+    <label>Symbol</label>
+    <input type="text" id="symbol" maxlength="1" value="*">
+
+    <label>Number of Rows</label>
+    <input type="number" id="rows" value="5" min="1">
+
+    <button onclick="generateTriangle()">Generate Pattern</button>
+
+    <br>
+    <div id="output">Output will appear here</div>
+</div>
+
+<script>
+    function generateTriangle() {
+        const symbol = document.getElementById('symbol').value || '*';
+        const rows = parseInt(document.getElementById('rows').value);
+        let result = "";
+
+        // Logic to create the centered inverted triangle 
+        for (let i = rows; i >= 1; i--) {
+            // 1. Add leading spaces: (Total Rows - Current Row Count)
+            let spaces = " ".repeat(rows - i);
+            
+            // 2. Add symbol with a space: (Symbol + " ") repeated 'i' times
+            let stars = (symbol + " ").repeat(i);
+            
+            result += spaces + stars + "\n";
+        }
+
+        document.getElementById('output').innerText = result;
+    }
+</script>
+
+</body>
+</html>
